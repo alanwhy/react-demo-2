@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+// import logo from "./logo.svg";
+import "./App.css";
+import NameCard from "./components/NameCard";
+import LikeBtn from "./components/LikeBtn";
+import DigitalClock from "./components/DigitalClock";
+import CommentBox from "./components/CommentBox";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NameCard
+        name="alan"
+        number={110}
+        isHuman={true}
+        tags={["阳光", "自信"]}
+      ></NameCard>
+      <LikeBtn></LikeBtn>
+      <DigitalClock></DigitalClock>
+      <CommentBox></CommentBox>
     </div>
   );
 }
