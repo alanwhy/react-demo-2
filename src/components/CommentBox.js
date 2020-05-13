@@ -17,7 +17,8 @@ class CommentBox extends React.Component {
   // }
 
   handleSubmit(event) {
-    console.log(this.textInput.value);
+    // console.log(this.textInput.value);
+    this.props.onAddComment(this.textInput.value);
     event.preventDefault();
   }
 
@@ -38,6 +39,7 @@ class CommentBox extends React.Component {
         <button type="submit" className="btn btn-primary">
           留言
         </button>
+        <p>已有{this.props.commentsLength}条数据</p>
       </form>
     );
   }
