@@ -1,52 +1,58 @@
 import React from "react";
-// import logo from "./logo.svg";
 import "./App.css";
-// import NameCard from "./components/NameCard";
-// import LikeBtn from "./components/LikeBtn";
-// import DigitalClock from "./components/DigitalClock";
-import CommentBox from "./components/CommentBox";
-import CommentList from "./components/CommentList";
-
-// function App() {
-//   // return (
-//   //   <div className="App">
-//   //     <NameCard
-//   //       name="alan"
-//   //       number={110}
-//   //       isHuman={true}
-//   //       tags={["阳光", "自信"]}
-//   //     ></NameCard>
-//   //     <LikeBtn></LikeBtn>
-//   //     <DigitalClock></DigitalClock>
-//   //     <CommentBox></CommentBox>
-//   //   </div>
-//   // );
-//   return <div className="App"></div>;
-// }
+import ThemeContext from "./theme-context";
+import ThemedBar from "./components/ThemedBar";
+const themes = {
+  light: {
+    classnames: "btn btn-primary",
+    bgColor: "#eeeeee",
+    color: "#000",
+  },
+  dark: {
+    classnames: "btn btn-light",
+    bgColor: "#222222",
+    color: "#fff",
+  },
+};
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      comments: ["this is my first reply"],
+      theme: "light",
     };
-    this.addComment = this.addComment.bind(this);
+    this.changeTheme = this.changeTheme.bind(this);
   }
-  addComment(comment) {
+  changeTheme(theme) {
     this.setState({
-      comments: [...this.state.comments, comment],
+      theme,
     });
   }
   render() {
-    const { comments } = this.state;
     return (
-      <div className="App">
-        <CommentList comments={comments}></CommentList>
-        <CommentBox
-          commentsLength={comments.length}
-          onAddComment={this.addComment}
-        ></CommentBox>
-      </div>
+      <ThemeContext.Provider value={themes[this.state.theme]}>
+        <div className="App">
+          <a
+            href="#theme-switcher"
+            className="btn btn-light"
+            onClick={() => {
+              this.changeTheme("light");
+            }}
+          >
+            浅色主题
+          </a>
+          <a
+            href="#theme-switcher"
+            className="btn btn-secondary"
+            onClick={() => {
+              this.changeTheme("dark");
+            }}
+          >
+            深色主题
+          </a>
+          <ThemedBar></ThemedBar>
+        </div>
+      </ThemeContext.Provider>
     );
   }
 }
